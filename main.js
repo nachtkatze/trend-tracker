@@ -3,7 +3,7 @@ $(function() {
 
 	function AppViewModel() {
 	self = this;  
-}
+	}
 
 
 	ko.applyBindings(new AppViewModel());
