@@ -5,12 +5,19 @@ $(function() {
 		var self = this; 
 		self.recent_tweets = ko.observable();
 
+		var hashtags = '';
+
 		var loadTweets = function() {
-			console.log(temp_tweets)
 			tweets.push.apply(tweets, temp_tweets)
 
 			self.recent_tweets(tweets);
 		}
+
+		var insertHashtag = function() {
+			
+		}
+
+		
 		loadTweets()
 		console.log("tweets", self.recent_tweets())
 		console.log(self.recent_tweets().length)
