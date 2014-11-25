@@ -16,6 +16,9 @@
     <!-- Custom styles for this template -->
     <link href="dashboard.css" rel="stylesheet">
 
+    <link href="jqcloud.css" rel="stylesheet">
+
+
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]
     <script src="../../assets/js/ie-emulation-modes-warning.js"></script>-->
@@ -85,13 +88,9 @@
 
           <div class="row placeholders">
             <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
+              <!-- <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail"> -->
+              <div id="hashtag-cloud" style="width: 280px; height: 240px;"></div>
+              <h4>Hashtags cloud</h4>
               <span class="text-muted">Something else</span>
             </div>
             <div class="col-xs-6 col-sm-3 placeholder">
@@ -111,22 +110,14 @@
             <table class="table table-striped">
               <thead>
                 <tr>
-                  <th>Writer</th>
-                  <th>Text</th>
+                  <th>Profile</th>
+                  <th>Tweet</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody data-bind="foreach: recent_tweets">
                 <tr>
-                  <td>1,001</td>
-                  <td data-bind="text: 'Hola chato'" ></td>
-                </tr>
-                <tr>
-                  <td>1,002</td>
-                  <td>amet</td>
-                </tr>
-                <tr>
-                  <td>1,003</td>
-                  <td>Integer</td>
+                  <td data-bind="text: user.name"></td>
+                  <td data-bind="text: text" ></td>
                 </tr>
               </tbody>
             </table>
@@ -148,5 +139,7 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.1.0/knockout-min.js"></script>
     <script src="main.js"></script>
     <script src="tweets.js"></script>
+    <script src="temp_tweets.js"></script>
+    <script src="jqcloud-1.0.4.min.js"></script>
   </body>
 </html>
