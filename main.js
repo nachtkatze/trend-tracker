@@ -5,8 +5,15 @@ $(function() {
         var self = this;
         self.recent_tweets = ko.observable();
 
+        self.classifyTweet = function(polarity){ 
+        	console.log(polarity)
+        	if(polarity==4){return 'bg-success'}; 
+        	if(polarity==2){return ''}; 
+        	if(polarity==0){return 'bg-danger'} 
+        } 
+
         var loadTweets = function() {
-            tweets.push.apply(tweets, temp_tweets)
+            // tweets.push.apply(tweets, temp_tweets)
 
             self.recent_tweets(tweets);
         }
