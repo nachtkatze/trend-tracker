@@ -3,27 +3,26 @@ $(function() {
 
     function AppViewModel() {
         var self = this;
-        self.recent_tweets = ko.observable();
+        self.recent_tweets = ko.observableArray();
+        self.order = ko.observable("retweet_count");
 
         self.classifyTweet = function(polarity){ 
-        	console.log(polarity)
         	if(polarity==4){return 'bg-success'}; 
         	if(polarity==2){return ''}; 
         	if(polarity==0){return 'bg-danger'} 
         } 
 
-        var loadTweets = function() {
-            // tweets.push.apply(tweets, temp_tweets)
-
+        self.loadTweets = function() {
             self.recent_tweets(tweets);
+            console.log('ORDER:',self.order())
+
+            self.recent_tweets.sort( function(left, right) {
+                return left[self.order()] == right[self.order()] ? 0 : (left[self.order()] < right[self.order()] ? 1 : -1);
+            });
+            return true;
         }
 
-        // var proccessHashtags = function() {
-        // 	console.log('Proccessing with a total of', totalCount, 'hashtags');
-        // }
-
-
-        loadTweets()
+        self.loadTweets()
         console.log("tweets", self.recent_tweets())
         console.log('Number of tweets:', self.recent_tweets().length)
 

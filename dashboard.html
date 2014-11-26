@@ -106,6 +106,9 @@
           </div>
 
           <h2 class="sub-header">Tweets</h2>
+            <div>
+              <input type="radio" value="retweet_count" data-bind="checked: order, click: loadTweets">Retweets</input>
+              <input type="radio" value="favorite_count" data-bind="checked: order, click: loadTweets">Favorites</input>
           <div class="table-responsive">
             <table class="table ">
               <thead>
