@@ -116,11 +116,13 @@
                   </tr>
                 </tbody>
               </table>
-              <select data-bind="options: nUserOptions, 
+              <span>
+              <select class="form-control select-lt" data-bind="options: nUserOptions, 
                 optionsCaption: 'Select number of users...',
                 value: nUsersSelected">
               </select>
-              <button data-bind="click: filter_users, text: 'Filter'"></button>
+              <button class="btn btn-primary" data-bind="click: filter_users, text: 'Filter'"></button>              
+              </span>
               <h4>Top users</h4>
               <span class="text-muted">Something else</span>
             </div>
