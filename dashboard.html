@@ -15,7 +15,6 @@
 
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
-    <link href="css/demo.css" rel="stylesheet">
 
     <link href="css/jqcloud.css" rel="stylesheet">
 
@@ -94,15 +93,35 @@
               <h4>Hashtags cloud</h4>
               <span class="text-muted">Something else</span>
             </div>
+
             <div class="col-md-4  placeholder">
               <canvas id="myChart" width="400" height="400"></canvas>
               <div id="legend"></div>
               <h4>Label</h4>
               <span class="text-muted">Something else</span>
             </div>
-            <div class="col-md-4 placeholder">
-              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
+
+            <div class="col-md-4 table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Username</th>
+                    <th>Followers</th>
+                  </tr>
+                </thead>
+                <tbody data-bind="foreach: filteredUsers">
+                  <tr>
+                    <td data-bind="text: name"></td>
+                    <td data-bind="text: followers_count"></td>
+                  </tr>
+                </tbody>
+              </table>
+              <select data-bind="options: nUserOptions, 
+                optionsCaption: 'Select number of users...',
+                value: nUsersSelected">
+              </select>
+              <button data-bind="click: filter_users, text: 'Filter'"></button>
+              <h4>Top users</h4>
               <span class="text-muted">Something else</span>
             </div>
           </div>
@@ -144,7 +163,6 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.1.0/knockout-min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/legend.js"></script>
     <script src="js/tweets.js"></script>
     <script src="js/temp_tweets.js"></script>
     <script src="js/hashtags.js"></script>

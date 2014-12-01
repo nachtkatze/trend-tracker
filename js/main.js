@@ -6,6 +6,10 @@ $(function() {
         self.recent_tweets = ko.observableArray();
         self.order = ko.observable("retweet_count");
         self.sentiment_tweets = ko.observable({pos: 0, neu: 0, neg: 0})
+        self.topUsers = ko.observableArray();
+        self.filteredUsers = ko.observableArray();
+        self.nUsersSelected = ko.observable();
+        self.nUserOptions = [3,5,10,20];
 
         //var sentiment_tweets = {pos: 0, neu: 0, neg: 0};
 
@@ -41,17 +45,37 @@ $(function() {
             }
         }
 
+        var order_followers = function() {
+            for (tweet in self.recent_tweets()) {
+                self.topUsers.push(self.recent_tweets()[tweet]['user']);
+
+            }
+            self.topUsers.sort( function(left, right) {
+                return left.followers_count == right.followers_count ? 0 : (left.followers_count < right.followers_count ? 1 : -1);
+            });
+        };
+
+        self.filter_users = function() {
+            var n_users = self.nUsersSelected();
+            if (!(n_users === parseInt(n_users,10))) {
+                return;
+            }
+            self.filteredUsers.removeAll();
+            for (var i = 0; i < n_users; i++) {   
+                self.filteredUsers.push(self.topUsers()[i]);
+            }
+        };
+
         self.loadTweets()
         console.log("tweets", self.recent_tweets())
         console.log('Number of tweets:', self.recent_tweets().length)
 
         var hashtagsJS = jQuery.parseJSON(hashtags);
         $("#hashtag-cloud").jQCloud(hashtagsJS);
-
         
-        count_sentiment()
-        console.log(self.sentiment_tweets())
-        console.log(self.sentiment_tweets()['pos'])
+        count_sentiment();
+        console.log(self.sentiment_tweets());
+
         var data = [
             {
                 value: self.sentiment_tweets()['neg'],
@@ -73,8 +97,14 @@ $(function() {
             }
         ]
         var ctx = $("#myChart").get(0).getContext("2d");
-        var myPieChart = new Chart(ctx).Pie(data);
-        legend($("#legend"), data);
+        var myPieChart = new Chart(ctx).Pie(data,{
+            responsive: true,
+            legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><div class=\"comm-how\"><%=segments[i].value%>%</div><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>",    
+        });
+        // $('#legend').html(myPieChart.generateLegend());
+
+        order_followers();
+        // console.log(self.topUsers())
     }
     ko.applyBindings(new AppViewModel());
 });
