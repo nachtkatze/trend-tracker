@@ -108,3 +108,24 @@ body {
   width: 200px;
   display: inline;
 }
+
+.pie-legend {
+  width: 200px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.legend-pos {
+  background-color: #7EDD1E;
+  border-radius: 20px;
+}
+
+.legend-neg {
+  background-color: #F7464A;
+  border-radius: 20px;
+}
+
+.legend-neu {
+  background-color: #8AAAC7;
+  border-radius: 20px;
+}
