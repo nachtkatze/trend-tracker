@@ -10,6 +10,22 @@ $(function() {
         self.filteredUsers = ko.observableArray();
         self.nUsersSelected = ko.observable();
         self.nUserOptions = [3,5,10,20];
+        self.query = ko.observable('');
+        self.n_tweets = ko.computed(function() {
+            return self.recent_tweets().length;
+        }, self);
+
+        self.searched = ko.computed(function() {
+            var search = self.query().toLowerCase();
+            return ko.utils.arrayFilter(self.recent_tweets(), function(tweet) {
+                return tweet.text.toLowerCase().indexOf(search) >= 0;
+            });
+        }, self);
+
+        self.search = function() {
+            self.loadTweets()
+            self.recent_tweets(self.searched())
+        }
 
         //var sentiment_tweets = {pos: 0, neu: 0, neg: 0};
 
@@ -21,6 +37,9 @@ $(function() {
 
         self.loadTweets = function() {
             self.recent_tweets(tweets);
+        }
+
+        self.order_tweets = function() {
             console.log('ORDER:',self.order())
 
             self.recent_tweets.sort( function(left, right) {
@@ -67,6 +86,7 @@ $(function() {
         };
 
         self.loadTweets()
+        self.order_tweets()
         console.log("tweets", self.recent_tweets())
         console.log('Number of tweets:', self.recent_tweets().length)
 

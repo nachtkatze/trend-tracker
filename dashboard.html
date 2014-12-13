@@ -54,9 +54,7 @@
             <li><a href="#">Profile</a></li>
             <li><a href="#">Help</a></li>
           </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form>
+          
         </div>
       </div>
     </nav>
@@ -134,10 +132,14 @@
             </div>
           </div>
 
-          <h2 class="sub-header">Tweets</h2>
+          <h2 class="sub-header">Tweets (<span data-bind="text: n_tweets"></span>)</h2>
             <div>
-              <input type="radio" value="retweet_count" data-bind="checked: order, click: loadTweets">Retweets</input>
-              <input type="radio" value="favorite_count" data-bind="checked: order, click: loadTweets">Favorites</input>
+              <input type="radio" value="retweet_count" data-bind="checked: order, click: order_tweets">Retweets</input>
+              <input type="radio" value="favorite_count" data-bind="checked: order, click: order_tweets">Favorites</input>
+              <form class="navbar-form navbar-right">
+                <input type="search" class="form-control" data-bind="value: query">
+                <button class="btn btn-primary" data-bind="click: search, text: 'Search'"></button> 
+              </form>
           <div class="table-responsive">
             <table class="table ">
               <thead>
